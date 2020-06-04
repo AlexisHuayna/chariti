@@ -1,6 +1,6 @@
-const user_routes = require('./user');
-const donation_routes = require('./donation');
-const project_routes = require('./project');
+const user_routes = require('./users');
+const donation_routes = require('./donations');
+const project_routes = require('./projects');
 
 module.exports = app => {
     app.use(user_routes);

@@ -3,14 +3,14 @@ const { Schema } = mongoose;
 const ObjectId = Schema.ObjectId;
 
 const ProjectSchema = new Schema({
-    UserOwnerId: { type: ObjectId },
-    FileId: { types: [ObjectId] },
-    ProjectId: { type: ObjectId },
-    ProjectName: { type: String },
-    ProjectDescription: { type: String },
-    ProjectDateInit: { type: Date },
-    ProjectDateClose: { type: Date },
-    ProjectState: { type: Boolean }
-})
+    UserOwnerId: { type: ObjectId, required: true },
+    FileId: { types: ObjectId },
+    ParticipationId: { type: ObjectId },
+    ProjectName: { type: String, required: true },
+    ProjectDescription: { type: String, required: true },
+    ProjectDateInit: { type: Date, required: true },
+    ProjectDateClose: { type: Date, required: true },
+    ProjectState: { type: Boolean, default: true }
+});
 
 module.exports = mongoose.model('Project', ProjectSchema);
