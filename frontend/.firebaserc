@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "charity-6ce4e": {
+      "hosting": {
+        "frontend": [
+          "charity-6ce4e"
+        ]
+      }
+    }
+  }
+}
