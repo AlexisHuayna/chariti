@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 const ObjectId = Schema.ObjectId;
 
 const ParticipationSchema = new Schema({
-    UserId: { type: ObjectId },
-    ProjectId: { type: ObjectId },
+    UserId: { type: ObjectId, required: true },
+    ProjectId: { type: ObjectId, required: true },
     ParticipationStatus: { type: Boolean, default: true }
 })
 

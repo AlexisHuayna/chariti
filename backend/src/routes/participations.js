@@ -1,8 +1,25 @@
 const express = require('express');
+const Participation_model = require('../models/Participation');
 const participation_routes = express.Router();
 
-project_routes.get('/api/participation', (req, res) => {
-    res.status(500).end()
+participation_routes.get('/participation', (req, res) => {
+    const filter = {}
+    const all = await Participation_model.find(filter);
+
+    res.send(all)
+});
+
+participation_routes.post('/participation', (req, res) => {
+
+});
+
+participation_routes.put('/participation', (req, res) => {
+
+});
+
+
+participation_routes.delete('/participation', (req, res) => {
+
 });
 
 /*
