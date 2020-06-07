@@ -13,6 +13,10 @@ import { UserComponent } from './components/user/user.component';
 import { DonationComponent } from './components/donation/donation.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { ProjectComponent } from './components/project/project.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './auth/login/login.component';
+import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { ProjectComponent } from './components/project/project.component';
     UserComponent,
     DonationComponent,
     ParticipationComponent,
-    ProjectComponent
+    ProjectComponent,
+    SidebarComponent,
+    HomeComponent,
+    LoginComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

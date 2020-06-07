@@ -1,19 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { ProjectComponent } from './components/project/project.component';
+import { DonationComponent } from './components/donation/donation.component';
+import { HomeComponent } from './components/home/home.component';
+import { Page404Component } from './components/page404/page404.component';
 
 
 const routes: Routes = [
+  { 
+    path: '',
+    component: HomeComponent
+  },
+  { 
+    path: 'login',
+    component: LoginComponent
+  },
+  { 
+    path: 'project',
+    component: ProjectComponent
+  },
+  { 
+    path: 'donation',
+    component: DonationComponent
+  },
+  { 
+    path: 'home',
+    component: HomeComponent
+  },
   {
-    path:'',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  { 
-    path: 'home', 
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule) 
-  },
-  { 
-    path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) 
+    path:'**',
+    component: Page404Component
   }
 ];
 

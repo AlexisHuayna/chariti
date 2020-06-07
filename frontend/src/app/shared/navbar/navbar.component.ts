@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   providers: [AuthService]
 })
 export class NavbarComponent implements OnInit {
+  public img = '';
   public isLogged = false;
   public currentuser = '';
   constructor(private authSvc: AuthService, private router: Router) { }
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
       if (auth) {
         this.isLogged = true;
         this.currentuser = auth.email;
+        this.img = auth.photoURL;
       } else {
         this.isLogged = false;
       }
