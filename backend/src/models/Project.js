@@ -4,8 +4,6 @@ const ObjectId = Schema.ObjectId;
 
 const ProjectSchema = new Schema({
     UserOwnerId: { type: ObjectId, required: true },
-    FileId: { types: ObjectId },
-    ParticipationId: { type: ObjectId },
     ProjectName: { type: String, required: true },
     ProjectDescription: { type: String, required: true },
     ProjectDateInit: { type: Date, required: true },

@@ -1,9 +1,13 @@
 const express = require('express');
-const Participation_model = require('../models/Participation');
+const Participation = require('../models/Participation');
 const participation_routes = express.Router();
 
-participation_routes.get('/participation', (req, res) => {
-    const filter = {}
+participation_routes.get('/participation/:userId/:projectId', (req, res) => {
+    var query = {}
+    var user_id = req.params.userId
+    var project_id = req.params.projectId
+    
+    Participation.find(query, (err, participation))
     const all = await Participation_model.find(filter);
 
     res.send(all)
