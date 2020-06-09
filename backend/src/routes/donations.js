@@ -2,9 +2,13 @@ const express = require('express')
 const donation_routes = express.Router();
 const Donation = require('../models/Donation');
 
-donation_routes.get('/api/donation', (req, res) => {
+donation_routes.get('/donations', (req, res) => {
     res.status(500).end()
-})
+});
+
+donation_routes.post('/donations', (req, res) => {
+    res.status(500).end()
+});
 
 
 /*
