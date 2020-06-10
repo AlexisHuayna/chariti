@@ -2,37 +2,61 @@ const express = require('express');
 const Participation = require('../models/Participation');
 const participation_routes = express.Router();
 
-participation_routes.get('/participation/:userId/:projectId', (req, res) => {
-    var query = {}
+participation_routes.get('/participations/users/:userId', (req, res) => {
+    var user_id = req.params.userId
+
+    var query = { UserId: user_id, ParticipationStatus: true }
+
+    Participation.find(query, (err, participations) => {
+        if(err){
+            res.status(500).end()
+        }
+        res.status(200).send(participations)
+    })
+});
+
+participation_routes.get('/participations/projects/:projectId', (req, res) => {
+    var project_id = req.params.projectId
+
+    var query = { ProjectId: project_id, ParticipationStatus: true }
+
+    Participation.find(query, (err, participations) => {
+        if(err){
+            res.status(500).end()
+        }
+        res.status(200).send(participations)
+    })
+});
+
+participation_routes.post('/participations/:userId/:projectId', (req, res) => {
     var user_id = req.params.userId
     var project_id = req.params.projectId
     
-    Participation.find(query, (err, participation))
-    const all = await Participation_model.find(filter);
+    var new_participation = new Participation({
+        UserId: user_id,
+        ProjectId: project_id,
+    });
 
-    res.send(all)
+    new_participation.save((err, participation) => {
+        if(err){
+            res.status(500).end()
+        }
+        res.status(200).send(participation)
+    });
 });
 
-participation_routes.post('/participation', (req, res) => {
+participation_routes.delete('/participations/:participationId', (req, res) => {
+    var participation_id = req.params.participationId
 
+    var query = { ParticipationStatus: false }
+
+    Participation.findByIdAndUpdate(participation_id, query, (err, participation) => {
+        if(err){
+            res.status(500).end()
+        }
+        res.status(200).send(participation)
+    });
 });
 
-participation_routes.put('/participation', (req, res) => {
-
-});
-
-
-participation_routes.delete('/participation', (req, res) => {
-
-});
-
-/*
-ruta para agregar participacion
-ruta para eliminar participacion manera logica
-ruta para ver todas las participaciones
-ruta para ver participaciones por id project
-ruta para ver participaciones por id user
-ruta para ver numero de participaciones en project
-*/
 
 module.exports = participation_routes;
