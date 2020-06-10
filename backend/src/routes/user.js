@@ -11,7 +11,6 @@ user_routes.get('/users/:userId', (req, res) => {
 })
 
 user_routes.post('/users', (req, res) => {
-    
     user_controller.createUser(req, res);
 });
 
