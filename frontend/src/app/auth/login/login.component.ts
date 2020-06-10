@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router, private authSvc:AuthService) { }
+  constructor(private router:Router, public authSvc:AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.authSvc.isAuth())
+  }
   
   onLoginGoogle() {
     this.authSvc.loginGoogleUser()
@@ -20,10 +22,7 @@ export class LoginComponent implements OnInit {
         if (res.additionalUserInfo.isNewUser) {
           console.log(res)
         }
-        else {
-          console.log(res)
-        }
-        this.router.navigate(['/']);
+        this.router.navigate(['/main']);
       })
       .catch(err => console.log(err));
   }
