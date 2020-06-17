@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyD6x_7d4CkA0ZJeHzWnYEvh_7kVzuiD9Mg",
-    authDomain: "charity-6ce4e.firebaseapp.com",
-    databaseURL: "https://charity-6ce4e.firebaseio.com",
-    projectId: "charity-6ce4e",
-    storageBucket: "charity-6ce4e.appspot.com",
-    messagingSenderId: "276929372719",
-    appId: "1:276929372719:web:319945109187be0a8ddcda",
-    measurementId: "G-VTCLTMH2L8"
+    apiKey: 'AIzaSyD6x_7d4CkA0ZJeHzWnYEvh_7kVzuiD9Mg',
+    authDomain: 'charity-6ce4e.firebaseapp.com',
+    databaseURL: 'https://charity-6ce4e.firebaseio.com',
+    projectId: 'charity-6ce4e',
+    storageBucket: 'charity-6ce4e.appspot.com',
+    messagingSenderId: '276929372719',
+    appId: '1:276929372719:web:319945109187be0a8ddcda',
+    measurementId: 'G-VTCLTMH2L8'
   }
 };
 
