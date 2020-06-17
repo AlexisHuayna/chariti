@@ -8,14 +8,17 @@ import { auth } from 'firebase/app';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(public angularFirebaseAuth: AngularFireAuth) { }
+
   loginGoogleUser() {
-    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    return this.angularFirebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
    }
+
   logoutUser() {
-    return this.afAuth.auth.signOut();
+    return this.angularFirebaseAuth.auth.signOut();
   }
+
   isAuth() {
-    return this.afAuth.authState.pipe(map(aut => aut));
+    return this.angularFirebaseAuth.authState.pipe(map(aut => aut));
   }
 }
