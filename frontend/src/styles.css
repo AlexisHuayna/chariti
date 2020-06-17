@@ -1,8 +1,16 @@
- body {
+@font-face{
+  font-family: 'Satisfy';
+  src: url('assets/fonts/Satisfy-Regular.woff2') format('woff2'),
+      url('assets/fonts/Satisfy-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
     overflow-x: hidden;
-  }
+}
   
-  #sidebar-wrapper {
+#sidebar-wrapper {
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -11,7 +19,7 @@
     transition: margin .25s ease-out;
     
     font-weight: 500;
-  }
+}
   
   #sidebar-wrapper .sidebar-heading {
     padding: 0.875rem 1.25rem;

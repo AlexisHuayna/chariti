@@ -1,0 +1,38 @@
+.login-background{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-image: url('../../../assets/images/charity_background.jpg');
+    background-repeat: no-repeat;
+    background-color: #f2f2f2;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+}
+
+.login-wrapper{
+    z-index: 2;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(75, 55, 30, 0.2);
+    border-radius: 7px;
+}
+
+
+h2 {
+    font-size: 4.5vw;
+    font-weight: 550;
+    font-style: normal;
+    font-family: 'Satisfy';
+}
+
+button {
+    font-family: 'Satisfy';
+    font-size: 2.1vw;
+    background-color: rgb(255, 255, 255, 0.9);
+}
+
+button:hover{
+    background-color: #DB4437;
+    color: white;
+}
