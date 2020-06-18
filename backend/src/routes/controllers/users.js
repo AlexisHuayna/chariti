@@ -70,10 +70,10 @@ module.exports = {
     },
     
     deleteUser: (req, res) => {
+        var user_id = req.params.userId
+        var query = { UserStatus: false }
     
-        var query = { UserEmail: req.body.email, UserStatus: true }
-    
-        User.findOneAndUpdate(query, {UserStatus: false}, (err, user) => {
+        User.findByIdAndUpdate(user_id, query, (err, user) => {
             if(err){
                 res.status(500).end()  
             } 

@@ -18,7 +18,7 @@ user_routes.put('/users/:userId', (req, res) => {
     user_controller.updateUser(req, res);
 });
 
-user_routes.delete('/users', (req, res) => {
+user_routes.delete('/users/:userId', (req, res) => {
     user_controller.deleteUser(req, res);
 });
 
