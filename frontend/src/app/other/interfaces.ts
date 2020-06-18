@@ -1,6 +1,6 @@
 import { ObjectUnsubscribedError } from 'rxjs';
 
-export interface UserInterface{
+export interface User {
     UserEmail: string;
     UserName: string;
     UserDescription: string;
@@ -9,7 +9,7 @@ export interface UserInterface{
     UserStatus: boolean;
 }
 
-export interface ProjectInterface{
+export interface Project {
     UserOwnerId: string;
     ProjectName: string;
     ProjectDescription: string;
@@ -18,7 +18,7 @@ export interface ProjectInterface{
     ProjectState: boolean;
 }
 
-export interface DonationInterface{
+export interface Donation {
     UserId: string;
     ProjectId: string;
     DonationAmount: number;
@@ -26,7 +26,7 @@ export interface DonationInterface{
     DonationStatus: boolean;
 }
 
-export interface ParticipationInterface{
+export interface Participation {
     UserId: string;
     ProjectId: string;
     ParticipationStatus: boolean;

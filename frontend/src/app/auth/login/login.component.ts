@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, public authSvc: AuthService) { }
+  constructor(private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
-    console.log(this.authSvc.isAuth());
+    console.log(this.authService.isAuth());
   }
 
   onLoginGoogle() {
-    this.authSvc.loginGoogleUser()
+    this.authService.loginGoogleUser()
       .then( res => {
         if (res.additionalUserInfo.isNewUser) {
           console.log(res);

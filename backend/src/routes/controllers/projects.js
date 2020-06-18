@@ -78,7 +78,7 @@ module.exports = {
 
     deleteProject: (req, res) => {
         var project_id = req.params.projectId
-        var query = {ProjectState: false}
+        var query = {ProjectStatus: false}
 
         //here send mail to all participants
 

@@ -10,7 +10,7 @@ donation_routes.get('/donations/projects/:projectId', (req, res) => {
     donation_controller.getDonationsByProjectId(req, res)
 });
 
-donation_routes.post('/donations/:userId/:projectId', (req, res) => {
+donation_routes.post('/donations', (req, res) => {
     donation_controller.createDonation(req, res)
 });
 

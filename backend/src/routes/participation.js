@@ -10,7 +10,7 @@ participation_routes.get('/participations/projects/:projectId', (req, res) => {
     participation_controller.getParticipationsByProjectId(req, res);
 });
 
-participation_routes.post('/participations/:userId/:projectId', (req, res) => {
+participation_routes.post('/participations', (req, res) => {
     participation_controller.createParticipation(req, res);
 });
 
