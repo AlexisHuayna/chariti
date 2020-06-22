@@ -1,4 +1,4 @@
-const Participation = require('../models/Participation');
+const Participation = require('../../models/Participation');
 
 module.exports = {
 
