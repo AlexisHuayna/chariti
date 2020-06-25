@@ -3,7 +3,7 @@ const Project = require('../../models/Project');
 module.exports = {
 
     getProjects: (req, res) => {
-        var query = { ProjectState: true }
+        var query = { ProjectStatus: true }
 
         Project.find(query, (err, projects) => {
             if(err){
@@ -12,7 +12,6 @@ module.exports = {
             res.status(200).send(projects);
         });
 
-        res.status(500).end()
     },
 
     getProjectByProjectId: (req, res) => {
@@ -43,10 +42,10 @@ module.exports = {
 
         var new_project = new Project({
             UserOwnerId: user_owner,
-            ProjectName: req.body.name,
-            ProjectDescription: req.body.description,
-            ProjectDateInit: req.body.dateInit,
-            ProjectDateClose: req.body.dateClose
+            ProjectName: req.body.ProjectName,
+            ProjectDescription: req.body.ProjectDescription,
+            ProjectDateInit: req.body.ProjectDateInit,
+            ProjectDateClose: req.body.ProjectDateClose
         });
 
         new_project.save((err, project) => {
@@ -61,10 +60,10 @@ module.exports = {
         var project_id = req.params.projectId
         
         var update_values = {
-            ProjectName: req.body.name ? req.body.name : "",
-            ProjectDescription: req.body.description ? req.body.description : "",
-            ProjectDateInit: req.body.dateInit ? req.body.dateInit : "",
-            ProjectDateClose: req.body.dateClose ? req.body.dateClose : ""
+            ProjectName: req.body.ProjectName ? req.body.ProjectName : "",
+            ProjectDescription: req.body.ProjectDescription ? req.body.ProjectDescription : "",
+            ProjectDateInit: req.body.ProjectDateInit ? req.body.ProjectDateInit : "",
+            ProjectDateClose: req.body.ProjectDateClose ? req.body.ProjectDateClose : ""
         }
 
         Project.findByIdAndUpdate(project_id, update_values, (err, project) => {

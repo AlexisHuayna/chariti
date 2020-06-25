@@ -28,13 +28,13 @@ module.exports = {
     },
     
     createDonation : (req, res) => {
-        var user_id = req.params.userId;
-        var project_id = req.params.projectId;
+        var user_id = req.body.UserId;
+        var project_id = req.body.ProjectId;
     
         var new_donation = new Donation({
             UserId: user_id,
             ProjectId: project_id,
-            DonationAmount: req.body.amount
+            DonationAmount: req.body.DonationAmount
         });
     
         new_donation.save((err, donation) => {

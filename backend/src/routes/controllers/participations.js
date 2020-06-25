@@ -29,8 +29,8 @@ module.exports = {
     },
 
     createParticipation: (req, res) => {
-        var user_id = req.params.userId
-        var project_id = req.params.projectId
+        var user_id = req.body.UserId
+        var project_id = req.body.ProjectId
         
         var new_participation = new Participation({
             UserId: user_id,

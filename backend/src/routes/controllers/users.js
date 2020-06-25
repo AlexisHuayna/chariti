@@ -1,8 +1,8 @@
 const User = require('../../models/User');
 
 module.exports = {
-    getUsers: (req, res) => {
-        var query = { }
+    getUsers: async (req, res) => {
+        var query = { UserStatus: true }
     
         User.find(query, (err, users) => {
             if(err){
@@ -14,7 +14,7 @@ module.exports = {
         
     },
     
-    getUserByUserId: (req, res) => {
+    getUserByUserId: async (req, res) => {
         var user_id = req.params.userId
         
         User.findById(user_id, (err, user) => {
@@ -32,13 +32,13 @@ module.exports = {
         });
     },
     
-    createUser: (req, res) => {
+    createUser: async (req, res) => {
         
         var new_user = new User({
-            UserEmail: req.body.email,
-            UserName: req.body.name,
-            UserDescription: req.body.description,
-            UserNumberContact: req.body.numberContact ? req.body.numberContact : "",
+            UserEmail: req.body.UserEmail,
+            UserName: req.body.UserName,
+            UserDescription: req.body.UserDescription,
+            UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "",
         });
         
         new_user.save((err, user) => {
@@ -51,13 +51,13 @@ module.exports = {
     
     },
     
-    updateUser: (req, res) => {
+    updateUser: async (req, res) => {
         var user_id = req.params.userId
     
         var update_values = {
-            UserName: req.body.name ? req.body.name : "",
-            UserDescription: req.body.description ? req.body.description : "",
-            UserNumberContact: req.body.numberContact ? req.body.numberContact : "",
+            UserName: req.body.UserName ? req.body.UserName : "",
+            UserDescription: req.body.UserDescription ? req.body.UserDescription : "",
+            UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "",
         }
     
         User.findByIdAndUpdate(user_id, update_values, (err, user) => {
@@ -69,7 +69,7 @@ module.exports = {
         })
     },
     
-    deleteUser: (req, res) => {
+    deleteUser: async (req, res) => {
         var user_id = req.params.userId
         var query = { UserStatus: false }
     
