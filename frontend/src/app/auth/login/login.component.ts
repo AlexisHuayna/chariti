@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         if (res.additionalUserInfo.isNewUser) {
           console.log(res);
         }
-        this.router.navigate(['/main']);
+        this.router.navigate(['/main/home']);
       })
       .catch(err => console.log(err));
   }

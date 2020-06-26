@@ -1,34 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-white rounded ">
-  <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#sidebar-wrapper" aria-expanded="false" aria-controls="collapseExample">
-    target
-  </button>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item" *ngIf="isLogged">
-        <a class="nav-link" routerLink="project">Inicio</a>
-      </li>
-      <li class="nav-item" *ngIf="isLogged">
         <a class="nav-link" routerLink="donation">
-        <img src="{{img}}" class="img-circle"   width="30" height="30">
           
         </a>
       </li>
-      <li class="nav-item" *ngIf="isLogged" style="cursor: pointer">
-        <a class="nav-link" (click)="onLogout()">Cerrar Sesión</a>
-      </li>
-      <li class="nav-item" *ngIf="!isLogged">
-        <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{userName}}
+          <img src="{{userImg}}" class="img-circle" width="30" height="30">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="user"><i class="fas fa-user-alt"></i> Perfil</a>
+          <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Configuración</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="onLogout()"  style="cursor: pointer"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
       </li>
     </ul>
   </div>
-  <script>
-    $("#menu-toggle").click(function (e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
 
 </nav>

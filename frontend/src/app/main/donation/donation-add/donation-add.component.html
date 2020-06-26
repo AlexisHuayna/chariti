@@ -1,1 +1,21 @@
-<p>donation-add works!</p>
+<p>
+    <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Añadir una donacion
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <form [formGroup]="donationAddForm">
+                    <div class="form-group">
+                        <label for="donationamount">Agregar un monto:</label>
+                        <input type="number" class="form-control" id="donationamount">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Donar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

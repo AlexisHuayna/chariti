@@ -2,9 +2,15 @@
 <div class="bg-info border-right text-white" id="sidebar-wrapper">
     <div class="sidebar-heading text-center">Charity</div>
     <div class="list-group list-group-flush">
-        <a routerLink="project" class="list-group-item list-group-item-action bg-info text-white" ><i class="fa fa-tasks"></i> Proyectos</a>
-        <a routerLink="donation" class="list-group-item list-group-item-action bg-info text-white" ><i class="fa fa-money" aria-hidden="true"></i> Donaciones</a>
-        <a routerLink="donation" class="list-group-item list-group-item-action bg-info text-white"><i class="fa fa-address-book" aria-hidden="true"></i> Sobre nosotros</a>
+        <a routerLink="home" class="list-group-item list-group-item-action bg-info text-white" ><i class="fas fa-home"></i> Inicio</a>
+        <a class="list-group-item list-group-item-action bg-info text-white" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-handshake"></i> Proyectos <i class="fas fa-caret-down"></i></a>
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <a routerLink="project" class="list-group-item list-group-item-action bg-light text-info" > Todos los proyectos</a>
+            <a routerLink="project/owner" class="list-group-item list-group-item-action bg-light text-info" > Mis proyectos</a>
+            <a routerLink="participation" class="list-group-item list-group-item-action bg-light text-info" > Mis participaciones</a>
+        </div>
+        <a routerLink="donation" class="list-group-item list-group-item-action bg-info text-white" ><i class="fas fa-hand-holding-usd"></i> Mis Donaciones</a>
+        <a routerLink="donation" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-address-card"></i> Sobre nosotros</a>
     </div>
 </div>
 <!-- /#sidebar-wrapper -->

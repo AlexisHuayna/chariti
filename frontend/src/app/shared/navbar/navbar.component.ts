@@ -9,20 +9,23 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   providers: [AuthService]
 })
 export class NavbarComponent implements OnInit {
-  public img = '';
+  public userImg = '';
+  public userName = '';
   public isLogged = false;
   public currentuser = '';
-  constructor(private authSvc: AuthService, private router: Router) { }
-
-  ngOnInit() {
+  constructor(private authSvc: AuthService, private router: Router) {
     this.getCurrentUser();
-  }
+   }
+
+  ngOnInit() {}
+
   getCurrentUser() {
     this.authSvc.isAuth().subscribe(auth => {
       if (auth) {
         this.isLogged = true;
         this.currentuser = auth.email;
-        this.img = auth.photoURL;
+        this.userImg = auth.photoURL;
+        this.userName = auth.displayName;
       } else {
         this.isLogged = false;
       }

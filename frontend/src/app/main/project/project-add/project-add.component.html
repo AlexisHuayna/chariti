@@ -1,1 +1,33 @@
-<p>project-add works!</p>
+<p>
+    <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Crear un proyecto
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <form [formGroup] = "projectAddForm">
+                    <div class="form-group">
+                        <label for="projectname">Nombre del proyecto:</label>
+                        <input type="text" class="form-control" id="projectname" formControlName="projectname">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectdescription">Descripción:</label>
+                        <input type="text" class="form-control" id="projectdescription" formControlName="projectdescription">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectdateini">Fecha de inicio: </label>
+                        <input type="date" class="form-control" id="projectdateini" formControlName="projectdateini">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectdateclose">Fecha de cierre: </label>
+                        <input type="date" class="form-control" id="projectdateclose" formControlName="projectdateclose">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear proyecto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
