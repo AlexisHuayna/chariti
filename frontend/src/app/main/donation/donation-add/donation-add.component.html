@@ -11,9 +11,17 @@
                 <form [formGroup]="donationAddForm">
                     <div class="form-group">
                         <label for="donationamount">Agregar un monto:</label>
-                        <input type="number" class="form-control" id="donationamount">
+                        <input type="number" class="form-control" id="donationamount" formControlName="donationamount">
                     </div>
-                    <button type="submit" class="btn btn-primary">Donar</button>
+                    <div *ngIf="donationAddForm.get('donationamount').invalid && (donationAddForm.get('donationamount').dirty || donationAddForm.get('donationamount').touched)" class="alert alert-danger">
+                        <div *ngIf="donationAddForm.get('donationamount').errors.required">
+                            Ingresa un monto
+                        </div>
+                        <div *ngIf="donationAddForm.get('donationamount').errors.pattern">
+                            Monto no valido
+                        </div>
+                    </div>
+                    <button [disabled]="donationAddForm.invalid" type="submit" class="btn btn-primary">Donar</button>
                 </form>
             </div>
         </div>

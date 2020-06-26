@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-donation-add',
@@ -8,8 +8,13 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DonationAddComponent implements OnInit {
 
-  donationAddForm: FormGroup;
-  constructor() { }
+  donationAddForm = new FormGroup({
+  });
+  constructor(private builder: FormBuilder) {
+    this.donationAddForm = builder.group({
+      donationamount: ['', Validators.compose([Validators.required, Validators.pattern(/(?:^\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$)/)])]
+    });
+  }
 
   ngOnInit() {
   }

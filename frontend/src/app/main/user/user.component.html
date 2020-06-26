@@ -8,12 +8,20 @@
     <div class="card">
         <div class="card-body">
             <div class="card-title">
-                <form>
+                <form [formGroup]="userWalletAddForm">
                     <div class="form-group">
                         <label for="userwallet">Ingresa un monto</label>
-                        <input type="number" class="form-control" id="userwallet">
+                        <input type="number" class="form-control" id="userwallet" formControlName="userwallet">
                     </div>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <div *ngIf="userWalletAddForm.get('userwallet').invalid && (userWalletAddForm.get('userwallet').dirty || userWalletAddForm.get('userwallet').touched)" class="alert alert-danger">
+                        <div *ngIf="userWalletAddForm.get('userwallet').errors.required">
+                            Ingresa un monto
+                        </div>
+                        <div *ngIf="userWalletAddForm.get('userwallet').errors.pattern">
+                            Monto no valido
+                        </div>
+                    </div>
+                    <button [disabled]="userWalletAddForm.invalid" type="submit" class="btn btn-primary">Añadir</button>
                 </form>
             </div>
         </div>

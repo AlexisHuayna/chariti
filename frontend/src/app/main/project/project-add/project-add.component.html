@@ -8,24 +8,53 @@
     <div class="card">
         <div class="card-body">
             <div class="card-title">
-                <form [formGroup] = "projectAddForm">
+                <form [formGroup]="projectAddForm" (ngSubmit)="addProject(projectAddForm.value)">
                     <div class="form-group">
                         <label for="projectname">Nombre del proyecto:</label>
                         <input type="text" class="form-control" id="projectname" formControlName="projectname">
                     </div>
+                    <div *ngIf="projectAddForm.get('projectname').invalid && (projectAddForm.get('projectname').dirty || projectAddForm.get('projectname').touched)" class="alert alert-danger">
+                        <div *ngIf="projectAddForm.get('projectname').errors.required">
+                            Debes ingresar un nombre del proyecto.
+                        </div>
+                        <div *ngIf="projectAddForm.get('projectname').errors.minlength">
+                            El nombre del proyecto debe tener 4 carácteres como minimo.
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="projectdescription">Descripción:</label>
-                        <input type="text" class="form-control" id="projectdescription" formControlName="projectdescription">
+                        <input type="text" class="form-control" id="projectdescription"
+                            formControlName="projectdescription">
                     </div>
-                    <div class="form-group">
-                        <label for="projectdateini">Fecha de inicio: </label>
-                        <input type="date" class="form-control" id="projectdateini" formControlName="projectdateini">
+                    <div *ngIf="projectAddForm.get('projectdescription').invalid && (projectAddForm.get('projectdescription').dirty || projectAddForm.get('projectdescription').touched)" class="alert alert-danger">
+                        <div *ngIf="projectAddForm.get('projectdescription').errors.required">
+                            Debes ingresar una Descripción del proyecto.
+                        </div>
+                        <div *ngIf="projectAddForm.get('projectdescription').errors.minlength">
+                            La descripción del proyecto debe tener 4 carácteres como minimo.
+                        </div>
+                        <div *ngIf="projectAddForm.get('projectdescription').errors.maxlength">
+                            La descripción del proyecto debe tener 100 carácteres como máximo.
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="projectdateclose">Fecha de cierre: </label>
-                        <input type="date" class="form-control" id="projectdateclose" formControlName="projectdateclose">
+                    <div formGroupName="dateGroup">
+                        <div class="form-group">
+                            <label for="projectdateini">Fecha de inicio: </label>
+                            <input type="date" class="form-control" id="projectdateini"
+                                formControlName="projectdateini">
+                        </div>
+                        <div class="form-group">
+                            <label for="projectdateclose">Fecha de cierre: </label>
+                            <input type="date" class="form-control" id="projectdateclose"
+                                formControlName="projectdateclose">
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear proyecto</button>
+                    <div *ngIf="projectAddForm.get('dateGroup').invalid && (projectAddForm.get('dateGroup').dirty || projectAddForm.get('dateGroup').touched)" class="alert alert-danger">
+                        <div *ngIf="projectAddForm.get('dateGroup').errors.invalidDate">
+                            La fecha de inicio no debe estar despues de la fecha de cierre.
+                        </div>
+                    </div>
+                    <button [disabled]="projectAddForm.invalid" type="submit" class="btn btn-primary">Crear proyecto</button>
                 </form>
             </div>
         </div>
