@@ -5,7 +5,8 @@ const URI = 'mongodb+srv://charity_user:pruebasdb@charitydb-iangf.mongodb.net/<C
 mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 const connection_db = mongoose.connection;
