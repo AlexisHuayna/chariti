@@ -38,7 +38,7 @@ module.exports = {
     },
 
     createProject: (req, res) => {
-        var user_owner = req.params.userId
+        var user_owner = req.body.UserOwnerId
 
         var new_project = new Project({
             UserOwnerId: user_owner,
@@ -50,6 +50,7 @@ module.exports = {
 
         new_project.save((err, project) => {
             if(err) {
+                console.log(err)
                 res.status(500).end()
             }
             res.status(200).send(project)

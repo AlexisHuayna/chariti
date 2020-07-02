@@ -7,9 +7,9 @@ module.exports = {
         User.find(query, (err, users) => {
             if(err){
                 res.status(500).end()
+            }else{
+                res.status(201).send(users);
             }
-    
-            res.status(201).send(users);
         });
         
     },
@@ -23,32 +23,40 @@ module.exports = {
             }
             
             if(!user['UserStatus']){
-            
-                //Change user status ?
-                res.status(500).send(user);
-            }
-    
-            res.status(200).send(user)
+                res.status(500).end();
+            }else{
+                res.status(200).send(user)
+            }    
         });
     },
     
     createUser: async (req, res) => {
-        
-        var new_user = new User({
-            UserEmail: req.body.UserEmail,
-            UserName: req.body.UserName,
-            UserDescription: req.body.UserDescription,
-            UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "",
-        });
-        
-        new_user.save((err, user) => {
+
+        var query = {UserEmail: req.body.UserEmail}
+        var update_old_user = {UserStatus: true}
+
+        User.findOneAndUpdate(query, update_old_user, (err, user) => {
             if(err){
-                res.status(500).end();
+                res.status(500).res.end()
+            }else if(user){
+                res.status(200).send(user);
+            }else{
+                var new_user = new User({
+                    UserEmail: req.body.UserEmail,
+                    UserName: req.body.UserName ? req.body.UserName : "CharityName",
+                    UserDescription: req.body.UserDescription ? req.body.UserDescription : "CharityDescription",
+                    UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "000000000",
+                });
+                
+                new_user.save((err, new_user_document) => {
+                    if(err){
+                        res.status(500).end();
+                    }else{
+                        res.status(201).send(new_user_document);
+                    }
+                });
             }
-    
-            res.status(201).send(user);
         });
-    
     },
     
     updateUser: async (req, res) => {
@@ -63,9 +71,10 @@ module.exports = {
         User.findByIdAndUpdate(user_id, update_values, (err, user) => {
             if(err){
                 res.status(500).end()
+            }else{
+                res.status(204).send(user)
             }
-    
-            res.status(204).send(user)
+
         })
     },
     
@@ -76,9 +85,9 @@ module.exports = {
         User.findByIdAndUpdate(user_id, query, (err, user) => {
             if(err){
                 res.status(500).end()  
-            } 
-            
-            res.status(204).send(user)
+            }else{
+                res.status(204).send(user)
+            }
         });
     
     }
