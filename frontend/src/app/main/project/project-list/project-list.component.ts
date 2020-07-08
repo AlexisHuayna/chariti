@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from 'src/app/services/project/project.service';
+import { Project } from 'src/app/other/interfaces';
+import { ObservableLike, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project-list',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectListComponent implements OnInit {
 
-  constructor() { }
+  @Input() props: { id: string;   viewDetails: boolean; } = null;
+  public projects: Project[];
+
+  constructor(public projectService: ProjectService) {
+    let projectsSubscription: Observable<Project[]>;
+    if ( this.props != null) {
+      if ( this.props.id == null ) {
+        projectsSubscription = projectService.getProjects();
+      } else {
+        projectsSubscription = projectService.getOwnerProjects(this.props.id);
+      }
+      projectsSubscription.subscribe({
+        next(projectsResponse) {
+          this.projects = projectsResponse;
+        }
+      });
+    }
+  }
 
   ngOnInit() {
   }
+
 
 }
