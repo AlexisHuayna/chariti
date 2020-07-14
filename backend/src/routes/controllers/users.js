@@ -30,9 +30,21 @@ module.exports = {
         });
     },
     
+    getUserByEmail: async (req, res) => {
+        var user_email = req.params.userEmail
+        const query = {UserEmail: user_email}
+        User.findOne(query, (err, user) => {
+            if(err){
+                res.status(500).end();
+            }else{
+                res.status(200).send(user);
+            }
+        });
+    },
+
     createUser: async (req, res) => {
 
-        var query = {UserEmail: req.body.UserEmail}
+        const query = {UserEmail: req.body.UserEmail}
         var update_old_user = {UserStatus: true}
 
         User.findOneAndUpdate(query, update_old_user, (err, user) => {

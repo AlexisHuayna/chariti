@@ -6,6 +6,10 @@ user_routes.get('/users', (req, res) => {
     user_controller.getUsers(req, res);
 });
 
+user_routes.get('/users/email/:userEmail', (req, res) => {
+    user_controller.getUserByEmail(req, res);
+})
+
 user_routes.get('/users/:userId', (req, res) => {
     user_controller.getUserByUserId(req, res);
 })

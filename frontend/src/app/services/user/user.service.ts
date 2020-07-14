@@ -4,16 +4,21 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { User } from '../../other/interfaces';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  BASE_URL = 'http://localhost:3000';
+  BASE_URL = 'http://localhost:8000';
 
+  getUserByEmail(email: string): Observable<User>{
+    return this.http.get<User>(`${this.BASE_URL}/users/email/${email}`);
+  }
   getUsers(): Observable<User[]>  {
     return this.http.get<User[]>(`${this.BASE_URL}/users`);
   }
