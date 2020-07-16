@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+import { User } from 'src/app/other/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, public authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
+  private user:User;
   ngOnInit() {
     console.log(this.authService.isAuth());
   }
@@ -19,8 +22,11 @@ export class LoginComponent implements OnInit {
   onLoginGoogle() {
     this.authService.loginGoogleUser()
       .then( res => {
-        if (res.additionalUserInfo.isNewUser) {
-          console.log(res);
+        if(res.additionalUserInfo.isNewUser){
+          this.user.UserEmail = res.user.email;
+          this.user.UserName = res.user.displayName;
+          this.user.UserDescription = res.user.photoURL;
+          this.userService.createUser(this.user)
         }
         this.router.navigate(['/main/home']);
       })

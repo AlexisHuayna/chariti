@@ -1,12 +1,12 @@
 import { ObjectUnsubscribedError } from 'rxjs';
 
 export interface User {
-    UserEmail: string;
-    UserName: string;
-    UserDescription: string;
-    UserNumberContact: string;
-    UserWallet: number;
-    UserStatus: boolean;
+    UserEmail?: string;
+    UserName?: string;
+    UserDescription?: string;
+    UserNumberContact?: string;
+    UserWallet?: number;
+    UserStatus?: boolean;
 }
 
 export interface Project {
