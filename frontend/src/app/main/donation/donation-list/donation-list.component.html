@@ -1,1 +1,10 @@
-<p>donation-list works!</p>
+<h1>Donation list component</h1>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let donations of donations">
+        <div class="row">
+            <div class="col">{{donations.UserId}}</div>
+            <div class="col">{{donations.DonationAmount | currency}}</div>
+        </div>
+    </li>
+</ul>
