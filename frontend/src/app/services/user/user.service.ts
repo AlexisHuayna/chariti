@@ -11,6 +11,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class UserService {
 
+
+  public user:User;
   constructor(private http: HttpClient) {
   }
 
