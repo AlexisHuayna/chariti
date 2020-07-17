@@ -1,30 +1,75 @@
-<p>
-    <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-        aria-controls="collapseExample">
-        Añadir a tu bolsa
-    </a>
-</p>
-<div class="collapse" id="collapseExample">
-    <div class="card">
-        <div class="card-body">
-            <div class="card-title">
-                <form [formGroup]="userWalletAddForm">
-                    <div class="form-group">
-                        <label for="userwallet">Ingresa un monto</label>
-                        <input type="number" class="form-control" id="userwallet" formControlName="userwallet">
+<div class="row" *ngIf="_user">
+    <div class="col-12">
+        <p>
+            <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                aria-controls="collapseExample">
+                Añadir a tu bolsa
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample" #collapse>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <form [formGroup]="userWalletAddForm" (ngSubmit)="addWallet(userWalletAddForm.value)">
+                            <div class="form-group">
+                                <label for="userwallet">Ingresa un monto</label>
+                                <input type="number" class="form-control" id="userwallet" formControlName="userwallet">
+                            </div>
+                            <div *ngIf="userWalletAddForm.get('userwallet').invalid && (userWalletAddForm.get('userwallet').dirty || userWalletAddForm.get('userwallet').touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="userWalletAddForm.get('userwallet').errors.required">
+                                    Ingresa un monto
+                                </div>
+                                <div *ngIf="userWalletAddForm.get('userwallet').errors.pattern">
+                                    Monto no valido
+                                </div>
+                            </div>
+                            <button [disabled]="userWalletAddForm.invalid" type="submit"
+                                class="btn btn-primary">Añadir</button>
+                        </form>
                     </div>
-                    <div *ngIf="userWalletAddForm.get('userwallet').invalid && (userWalletAddForm.get('userwallet').dirty || userWalletAddForm.get('userwallet').touched)" class="alert alert-danger">
-                        <div *ngIf="userWalletAddForm.get('userwallet').errors.required">
-                            Ingresa un monto
-                        </div>
-                        <div *ngIf="userWalletAddForm.get('userwallet').errors.pattern">
-                            Monto no valido
-                        </div>
-                    </div>
-                    <button [disabled]="userWalletAddForm.invalid" type="submit" class="btn btn-primary">Añadir</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-12">
+        <div class="card mb-3 mt-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{_user.UserDescription}}" class="card-img" style="width: 200px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">Nombre: {{_user.UserName}}</h3>
+                        <p class="card-text">Correo electronico: {{_user.UserEmail}}</p>
+                        <p class="card-text">Tu bolsa: S/. {{_user.UserWallet}}</p>
+                        <p class="card-text" *ngIf="_user.UserNumberContact!=000000000">Numero de contacto:
+                            {{_user.UserNumberContact}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Proyecto</th>
+            <th scope="col">Fecha de inicio</th>
+            <th scope="col">Fecha de fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of _projects;index as i">
+            <th scope="row">{{i}}</th>
+            <td>{{project.ProjectName}}</td>
+            <td>{{project.ProjectDateInit}}</td>
+            <td>{{project.ProjectDateClose}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
 </div>
-<p>user works!</p>

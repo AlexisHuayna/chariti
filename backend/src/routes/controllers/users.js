@@ -78,6 +78,7 @@ module.exports = {
             UserName: req.body.UserName ? req.body.UserName : "",
             UserDescription: req.body.UserDescription ? req.body.UserDescription : "",
             UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "",
+            UserWallet: req.body.UserWallet ? req.body.UserWallet : "",
         }
     
         User.findByIdAndUpdate(user_id, update_values, (err, user) => {

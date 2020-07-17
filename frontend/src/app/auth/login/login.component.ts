@@ -14,9 +14,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
-  private user: User;
+  private user: User={
+    UserEmail: '',
+    UserName: '',
+    UserDescription: ''
+  };
   ngOnInit() {
-    console.log(this.authService.isAuth());
   }
 
   onLoginGoogle() {

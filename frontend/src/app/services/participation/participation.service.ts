@@ -16,8 +16,8 @@ export class ParticipationService {
   getParticipationsProject(projectId: string): Observable<Participation[]>  {
     return this.http.get<Participation[]>(`${this.BASE_URL}/participations/projects/${projectId}`);
   }
-  getParticipationsUser(userId: string): Observable<Participation> {
-    return this.http.get<Participation>(`${this.BASE_URL}/participations/users/${userId}`);
+  getParticipationsUser(userId: string): Observable<Participation[]> {
+    return this.http.get<Participation[]>(`${this.BASE_URL}/participations/users/${userId}`);
   }
   createParticipation(participation: Participation): Observable<Participation> {
     return this.http.post<Participation>(`${this.BASE_URL}/participations`, participation);
