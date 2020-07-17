@@ -1,1 +1,7 @@
-<p>participation-list works!</p>
+<h1>Participation list</h1>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let participation of participations">
+        {{participation.UserId}}
+    </li>
+</ul>
