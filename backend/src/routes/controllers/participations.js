@@ -50,11 +50,11 @@ module.exports = {
 
         var query = { ParticipationStatus: false }
 
-        Participation.findByIdAndUpdate(participation_id, query, (err, participation) => {
+        Participation.findByIdAndUpdate(participation_id, query, {new: true}, (err, participation_updated) => {
             if(err){
                 res.status(500).end()
             }
-            res.status(200).send(participation)
+            res.status(200).send(participation_updated)
         });
     }
 

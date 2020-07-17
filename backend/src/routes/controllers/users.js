@@ -80,25 +80,24 @@ module.exports = {
             UserNumberContact: req.body.UserNumberContact ? req.body.UserNumberContact : "",
         }
     
-        User.findByIdAndUpdate(user_id, update_values, (err, user) => {
+        User.findByIdAndUpdate(user_id, update_values, {new: true}, (err, user_updated) => {
             if(err){
                 res.status(500).end()
             }else{
-                res.status(204).send(user)
+                res.status(200).send(user_updated)
             }
-
-        })
+        });
     },
     
     deleteUser: async (req, res) => {
         var user_id = req.params.userId
         var query = { UserStatus: false }
     
-        User.findByIdAndUpdate(user_id, query, (err, user) => {
+        User.findByIdAndUpdate(user_id, query, {new: true}, (err, user_updated) => {
             if(err){
                 res.status(500).end()  
             }else{
-                res.status(204).send(user)
+                res.status(200).send(user_updated)
             }
         });
     

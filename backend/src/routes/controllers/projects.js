@@ -67,12 +67,12 @@ module.exports = {
             ProjectDateClose: req.body.ProjectDateClose ? req.body.ProjectDateClose : ""
         }
 
-        Project.findByIdAndUpdate(project_id, update_values, (err, project) => {
+        Project.findByIdAndUpdate(project_id, update_values, {new: true}, (err, project_updated) => {
             if(err){
                 res.status(500).end()
             }
 
-            res.status(204).send(project)
+            res.status(200).send(project_updated)
         })
     },
 
@@ -82,11 +82,11 @@ module.exports = {
 
         //here send mail to all participants
 
-        Project.findByIdAndUpdate(project_id, query, (err, project) => {
+        Project.findByIdAndUpdate(project_id, query, {new: true}, (err, project_updated) => {
             if(err){
                 res.status(500).end()
             }
-            res.status(200).send(project)
+            res.status(200).send(project_updated)
         });
 
     }
