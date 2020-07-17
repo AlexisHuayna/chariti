@@ -50,11 +50,11 @@ module.exports = {
 
         var query = { DonationAmount: req.body.amount };
 
-        Donation.findByIdAndUpdate(donation_id, query, (err, donation) => {
+        Donation.findByIdAndUpdate(donation_id, query, {new: true}, (err, donation_updated) => {
             if(err){
                 res.status(500).end();
             }
-            res.status(200).send(donation);
+            res.status(200).send(donation_updated);
         });
     },
 
@@ -63,11 +63,11 @@ module.exports = {
 
         var query = { DonationStatus: false };
 
-        Donation.findByIdAndUpdate(donation_id, query, (err, donation) => {
+        Donation.findByIdAndUpdate(donation_id, query, {new: true}, (err, donation_updated) => {
             if(err){
                 res.status(500).end();
             }
-            res.status(200).send(donation);
+            res.status(200).send(donation_updated);
         });
     }
 }
