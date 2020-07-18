@@ -1,7 +1,7 @@
 import { ObjectUnsubscribedError } from 'rxjs';
 
 export interface User {
-    _id?:string;
+    _id?: string;
     UserEmail?: string;
     UserName?: string;
     UserDescription?: string;

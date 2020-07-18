@@ -12,13 +12,13 @@ import { AuthService } from '../auth/auth.service';
 export class UserService {
 
 
-  public user:User;
+  public user: User;
   constructor(private http: HttpClient) {
   }
 
   BASE_URL = 'http://localhost:8000';
 
-  getUserByEmail(email: string): Observable<User>{
+  getUserByEmail(email: string): Observable<User> {
     return this.http.get<User>(`${this.BASE_URL}/users/email/${email}`);
   }
   getUsers(): Observable<User[]>  {

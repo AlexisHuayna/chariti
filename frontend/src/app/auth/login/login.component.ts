@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
-  private user: User={
+  private user: User = {
     UserEmail: '',
     UserName: '',
     UserDescription: ''
@@ -30,13 +30,12 @@ export class LoginComponent implements OnInit {
           this.user.UserName = res.user.displayName;
           this.user.UserDescription = res.user.photoURL;
           this.userService.createUser(this.user).subscribe(
-            res => this.userService.user = res
-          )
-        }
-        else {
+            user => this.userService.user = user
+          );
+        } else {
           this.userService.getUserByEmail(res.user.email).subscribe(
-            res => this.userService.user = res
-          )
+            user => this.userService.user = user
+          );
         }
         this.router.navigate(['/main/home']);
       })

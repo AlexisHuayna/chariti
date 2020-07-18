@@ -15,12 +15,13 @@ export class UserComponent implements OnInit {
 
   @ViewChild('collapse', { static: true }) collapse: ElementRef;
 
-  public _user: User;
-  public _projects: Project[];
+  public user: User;
+  public projects: Project[];
 
   userWalletAddForm = new FormGroup({
   });
-  constructor(private builder: FormBuilder, private userService: UserService, private authService: AuthService, private participationService:ParticipationService, private projectService: ProjectService) {
+  constructor(private builder: FormBuilder, private userService: UserService, private authService: AuthService,
+              private participationService: ParticipationService, private projectService: ProjectService) {
     this.userWalletAddForm = builder.group({
       userwallet: ['', Validators.compose([Validators.required, Validators.pattern(/(?:^\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$)/)])]
     });
@@ -35,31 +36,31 @@ export class UserComponent implements OnInit {
       res => {
         this.userService.getUserByEmail(res.email).subscribe(
           user => {
-            this._user = user
+            this.user = user;
           }
-        )
+        );
       }
-    )
+    );
   }
 
-  getParticipation(id:string){
+  getParticipation(id: string) {
     this.participationService.getParticipationsUser(id).subscribe(
       res => {
-        for(let participation of res as Participation[]){
+        for (const participation of res as Participation[]) {
           this.projectService.getProject(participation.ProjectId).subscribe(
-            project => this._projects.push(project)
-          )
+            project => this.projects.push(project)
+          );
         }
       }
-    )
+    );
   }
 
   addWallet(values) {
     if (confirm('¿Añadir dinero?')) {
-      this._user.UserWallet = this._user.UserWallet + values.userwallet;
-      this.userService.updateUser(this._user._id, this._user).subscribe(
+      this.user.UserWallet = this.user.UserWallet + values.userwallet;
+      this.userService.updateUser(this.user._id, this.user).subscribe(
         res => {
-          this._user = res;
+          this.user = res;
         }
       );
     }
