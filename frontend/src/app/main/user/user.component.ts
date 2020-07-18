@@ -20,10 +20,15 @@ export class UserComponent implements OnInit {
 
   userWalletAddForm = new FormGroup({
   });
+  userNumberAddForm = new FormGroup({
+  });
   constructor(private builder: FormBuilder, private userService: UserService, private authService: AuthService,
               private participationService: ParticipationService, private projectService: ProjectService) {
     this.userWalletAddForm = builder.group({
       userwallet: ['', Validators.compose([Validators.required, Validators.pattern(/(?:^\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$)/)])]
+    });
+    this.userNumberAddForm = builder.group({
+      usernumbercontact: ['', Validators.compose([Validators.required, Validators.pattern(/(?:^\d{6,9}?$)/)])]
     });
     this.currentUser();
   }
@@ -65,6 +70,14 @@ export class UserComponent implements OnInit {
       );
     }
     this.collapse.nativeElement.className = 'collapse';
+  }
+  addNumber(values) {
+      this.user.UserNumberContact = values.usernumbercontact;
+      this.userService.updateUser(this.user._id, this.user).subscribe(
+        res => {
+          this.user = res;
+        }
+      );
   }
 
 }

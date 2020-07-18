@@ -1,4 +1,4 @@
-<div class="row" *ngIf="_user">
+<div class="row" *ngIf="user">
     <div class="col-12">
         <p>
             <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
@@ -36,40 +36,63 @@
         <div class="card mb-3 mt-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="{{_user.UserDescription}}" class="card-img" style="width: 200px;">
+                    <img src="{{user.UserDescription}}" class="card-img img-thumbnail" style="width: 300px;">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h3 class="card-title">Nombre: {{_user.UserName}}</h3>
-                        <p class="card-text">Correo electronico: {{_user.UserEmail}}</p>
-                        <p class="card-text">Tu bolsa: S/. {{_user.UserWallet}}</p>
-                        <p class="card-text" *ngIf="_user.UserNumberContact!=000000000">Numero de contacto:
-                            {{_user.UserNumberContact}}</p>
+                        <h4 class="card-title">Nombre: {{user.UserName}}</h4>
+                        <p class="card-text">Correo electronico: {{user.UserEmail}}</p>
+                        <p class="card-text">Tu bolsa: S/. {{user.UserWallet}}</p>
+                        <p class="card-text" *ngIf="user.UserNumberContact!=000000000">Numero de
+                            contacto:
+                            {{user.UserNumberContact}}</p>
+
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer text-center">
+
+                        <button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
+                            Modificar un número de contacto
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form [formGroup]="userNumberAddForm"
+                                        (ngSubmit)="addNumber(userNumberAddForm.value)">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">M odificar número de
+                                                contacto</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="UserNumberContact">Ingresa un numero de contacto</label>
+                                                <input type="number" class="form-control" id="UserNumberContact"
+                                                    formControlName="usernumbercontact">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                [disabled]="userNumberAddForm.invalid">Añadir</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary" routerLink="/main/participation">Ver participaciones</button>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="col-12">
-        <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Proyecto</th>
-            <th scope="col">Fecha de inicio</th>
-            <th scope="col">Fecha de fin</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let project of _projects;index as i">
-            <th scope="row">{{i}}</th>
-            <td>{{project.ProjectName}}</td>
-            <td>{{project.ProjectDateInit}}</td>
-            <td>{{project.ProjectDateClose}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
+
 </div>
