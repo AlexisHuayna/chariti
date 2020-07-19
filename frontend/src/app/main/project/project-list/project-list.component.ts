@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProjectListComponent implements OnInit {
 
-  @Input() props: { id: string;   viewDetails: boolean; } = null;
+  @Input() props: { idUser: string;   viewDetails: boolean; } = null;
   public projects: Project[];
 
   constructor(public projectService: ProjectService) {
