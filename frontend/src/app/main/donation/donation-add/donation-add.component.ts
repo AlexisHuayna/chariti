@@ -22,7 +22,6 @@ export class DonationAddComponent implements OnInit {
       donationamount: ['', Validators.compose([Validators.required, Validators.pattern(/(?:^\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$)/)])]
     });
   }
-
   ngOnInit() {
     this.currentUser();
   }
@@ -40,7 +39,6 @@ export class DonationAddComponent implements OnInit {
   addDonation(values) {
     if (values.donationamount <= this.user.UserWallet) {
       this.donation.DonationAmount = values.donationamount;
-      this.donation.DonationDate = new Date();
       this.donation.ProjectId = '1';
       this.donation.UserId = this.user._id;
       this.donationService.createDonation(this.donation).subscribe(
