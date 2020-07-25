@@ -1,2 +1,5 @@
 <app-project-add></app-project-add>
-<p>project-owner works!</p>
+<app-project-detail [props]="projectDetailProps" ></app-project-detail>
+<app-project-list [props]="projectListProps" (selectedProjectOnChild)="updateSelectedProject($event)"></app-project-list>
+<app-donation-list [props]="donationsListProps"></app-donation-list>
+<app-participation-list [props]="participationListProps"></app-participation-list>

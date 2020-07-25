@@ -16,7 +16,7 @@ export class DonationService {
   getLastDonations(): Observable<Donation[]> {
     return this.http.get<Donation[]>(`${this.BASE_URL}/donations`);
   }
-  getUserDonationsProject(projectId: string, userId: string): Observable<Donation[]> {
+  getUserDonationsOnProject(projectId: string, userId: string): Observable<Donation[]> {
     return this.http.get<Donation[]>(`${this.BASE_URL}/donations/${projectId}/${userId}`);
   }
   getDonationsProject(projectId: string): Observable<Donation[]>  {

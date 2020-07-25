@@ -13,21 +13,18 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ProjectComponent implements OnInit {
 
-  @Input() props: {idUser: string; };
-  public projectListProps: { idUser: string;   viewDetails: boolean; };
+
+  public projectListProps: { idUser: string; viewDetails: boolean; };
   public donationsListProps: { idUser: string; idProject: string; viewDetails: boolean; };
   public participationListProps: {userId: string; projectId: string; };
-  public projects: Project[];
-  public donations: Donation[];
-  public participations: Participation[];
+  public projectDetailProps: {selectedProject: Project; idUser: string; };
+  public selectedProject: Project = null;
   public currentUser: User;
-  public selectedProject: Project;
 
   constructor(public projectService: ProjectService, public donationService: DonationService,
               public participationService: ParticipationService, public authService: AuthService,
               public userService: UserService) {
-                this.getCurrentUser();
-                this.getData();
+              this.getCurrentUser();
   }
 
   ngOnInit() {
@@ -39,79 +36,31 @@ export class ProjectComponent implements OnInit {
         this.userService.getUserByEmail(res.email).subscribe(
           user => {
             this.currentUser = user;
+            this.initChilds();
           }
         );
       }
     );
   }
 
-  getData() {
-    if (this.props != null) {
-      if (this.props.idUser == null) {
-        this.setProjects();
-        this.setPropsWithoutUser();
-      } else {
-        this.setOwnProjects();
-        this.setOwnDonations();
-        this.setOwnParticipations();
-        this.setPropsWithUser();
-      }
-    }
+  initChilds() {
+    this.projectListProps = { idUser: null, viewDetails: false };
+
+    this.donationsListProps = { idProject: null, idUser: null, viewDetails: false };
+
+    this.participationListProps = { userId: null, projectId: null };
+
+    this.projectDetailProps = {selectedProject: this.selectedProject, idUser: this.currentUser._id };
   }
 
-  setPropsWithoutUser() {
-    this.donationsListProps.idUser = null;
-    this.donationsListProps.idProject = null;
-    this.donationsListProps.viewDetails = false;
+  updateSelectedProject(selectedProjectOnChild: Project) {
+    this.selectedProject = selectedProjectOnChild;
 
-    this.projectListProps.idUser = null;
-    this.projectListProps.viewDetails = false;
+    this.donationsListProps.idProject = this.selectedProject._id;
 
-    this.participationListProps.projectId = null;
-    this.participationListProps.userId = null;
-  }
+    this.participationListProps.projectId = this.selectedProject._id;
 
-  setPropsWithUser() {
-    this.donationsListProps.idUser = this.props.idUser;
-    this.donationsListProps.idProject = null;
-    this.donationsListProps.viewDetails = false;
+    this.projectDetailProps.selectedProject = this.selectedProject;
 
-    this.projectListProps.idUser = this.props.idUser;
-    this.projectListProps.viewDetails = false;
-
-    this.participationListProps.userId = this.props.idUser;
-    this.participationListProps.projectId = null;
-  }
-
-  setOwnParticipations() {
-    this.participationService.getParticipationsUser(this.props.idUser).subscribe(
-      participationsResponse => {
-        this.participations = participationsResponse;
-      }
-    );
-  }
-
-  setOwnDonations() {
-    this.donationService.getDonationsUser(this.props.idUser).subscribe(
-      donationsResponse => {
-        this.donations = donationsResponse;
-      }
-    );
-  }
-
-  setOwnProjects() {
-    this.projectService.getOwnerProjects(this.props.idUser).subscribe(
-      projectResponse => {
-        this.projects = projectResponse;
-      }
-    );
-  }
-
-  setProjects() {
-    this.projectService.getProjects().subscribe(
-      projectResponse => {
-        this.projects = projectResponse;
-      }
-    );
   }
 }

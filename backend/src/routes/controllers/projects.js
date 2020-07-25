@@ -27,7 +27,7 @@ module.exports = {
 
     getProjectsByOwnerId: (req, res) => {
         var user_owner = req.params.userId
-        var query = { UserOwnerId: user_owner, ProjectState: true }
+        var query = { UserOwnerId: user_owner, ProjectStatus: true }
 
         Project.find(query, (err, projects) => {
             if(err){
