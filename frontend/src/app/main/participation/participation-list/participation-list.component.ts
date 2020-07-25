@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ParticipationService } from 'src/app/services/participation/participation.service';
-import { Participation, Project, User } from 'src/app/other/interfaces';
+import { Participation, Project, User, EmbeddedParticipation } from 'src/app/other/interfaces';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
 import { ProjectService } from 'src/app/services/project/project.service';
@@ -10,13 +10,16 @@ import { ProjectService } from 'src/app/services/project/project.service';
   templateUrl: './participation-list.component.html',
   styleUrls: ['./participation-list.component.css']
 })
-export class ParticipationListComponent implements OnInit {
+export class ParticipationListComponent implements OnInit, OnChanges {
 
    @Input() props: {userId: string; projectId: string; };
    public participations: Participation[];
-   public usersOnParticipation: User[];
-   public projectsOnParticipation: Project[];
+   public embeddedParticipation: EmbeddedParticipation[];
+
    constructor(public participationService: ParticipationService, public userService: UserService, public projectService: ProjectService) {
+   }
+
+   ngOnChanges(changes: SimpleChanges): void {
       this.getParticipations();
    }
 
@@ -26,26 +29,36 @@ export class ParticipationListComponent implements OnInit {
    public getParticipations(): void {
       if (this.props != null) {
          let participationObservable: Observable<Participation[]>;
-         if (this.props.userId != null) {
+         if (this.props.userId != null && this.props.projectId == null) {
             participationObservable = this.participationService.getParticipationsUser(this.props.userId);
-         } else {
+         } else if (this.props.userId == null && this.props.projectId != null) {
             participationObservable = this.participationService.getParticipationsProject(this.props.projectId);
+         } else {
+            participationObservable = null;
          }
-         participationObservable.subscribe(participationsResponse => {
-            this.participations = participationsResponse;
-            if (this.props.userId != null) {
-               this.setProjects();
-            } else {
-               this.setUsers();
-            }
-         });
+         if (participationObservable) {
+            participationObservable.subscribe(participationsResponse => {
+               this.participations = participationsResponse;
+               if (this.props.userId != null) {
+                  this.setProjects();
+               } else {
+                  this.setUsers();
+               }
+            });
+         }
+
       }
    }
 
    public setUsers(): void {
       this.participations.forEach(participation => {
          this.userService.getUser(participation.UserId).subscribe(user => {
-            this.usersOnParticipation.push(user);
+            const newParticipation: EmbeddedParticipation = {
+               _id: participation._id,
+               User: user,
+               ParticipationStatus: participation.ParticipationStatus
+            };
+            this.embeddedParticipation.push(newParticipation);
          });
       });
    }
@@ -53,7 +66,12 @@ export class ParticipationListComponent implements OnInit {
    public setProjects(): void {
       this.participations.forEach(participation => {
          this.projectService.getProject(participation.ProjectId).subscribe(project => {
-            this.projectsOnParticipation.push(project);
+            const newParticipation: EmbeddedParticipation = {
+               _id: participation._id,
+               Project: project,
+               ParticipationStatus: participation.ParticipationStatus
+            };
+            this.embeddedParticipation.push(newParticipation);
          });
       });
    }

@@ -1,1 +1,14 @@
-<app-donation-add></app-donation-add>
+<h1>
+    Project detail
+</h1>
+
+<div *ngIf="props != null && props.selectedProject != null" class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{props.selectedProject.ProjectName}}</h4>
+        <p>{{props.selectedProject.ProjectDescription}}</p>
+        <p>{{props.selectedProject.ProjectDateInit | date}}</p>
+        <p>{{props.selectedProject.ProjectDateClose | date}}</p>
+        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser">Donar</button>
+        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser">Participar</button>
+    </div>
+</div>

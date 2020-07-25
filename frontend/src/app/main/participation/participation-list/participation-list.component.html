@@ -1,7 +1,12 @@
-<h1>Participation list</h1>
+<h1>List of participants</h1>
 
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let participation of participations">
-        {{participation.UserId}}
+<ul class="list-group" *ngIf="participations != null">
+    <li class="list-group-item" *ngFor="let participation of embeddedParticipation" >
+        <div *ngIf="props.userId != null">
+            <span>{{participation.User.UserName}}</span>
+        </div>
+        <div *ngIf="props.projectId != null">
+            <span>{{participation.Project.ProjectName}}</span>
+        </div>
     </li>
 </ul>

@@ -1,6 +1,6 @@
-<h1>Donation list component</h1>
+<h3>List of donators</h3>
 
-<ul class="list-group">
+<ul class="list-group" *ngIf="donations != null">
     <li class="list-group-item" *ngFor="let donations of donations">
         <div class="row">
             <div class="col">{{donations.UserId}}</div>

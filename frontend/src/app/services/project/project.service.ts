@@ -12,7 +12,7 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  BASE_URL = 'http://localhost:3000';
+  BASE_URL = 'http://localhost:8000';
 
   getProject(id: string): Observable<Project> {
     return this.http.get<Project>(`${this.BASE_URL}/projects/${id}`);

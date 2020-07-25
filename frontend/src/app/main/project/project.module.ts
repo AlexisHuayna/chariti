@@ -8,15 +8,17 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectAddComponent } from './project-add/project-add.component';
 import { ProjectOwnerComponent } from './project-owner/project-owner.component';
 import { DonationAddComponent } from '../donation/donation-add/donation-add.component';
+import { DonationListComponent } from '../donation/donation-list/donation-list.component';
+import { ParticipationListComponent } from '../participation/participation-list/participation-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProjectComponent, ProjectDetailComponent, ProjectListComponent, ProjectAddComponent,
-                  ProjectOwnerComponent, DonationAddComponent],
+                  ProjectOwnerComponent, DonationAddComponent, DonationListComponent, ParticipationListComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class ProjectModule { }

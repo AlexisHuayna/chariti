@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Project } from 'src/app/other/interfaces';
 
 @Component({
   selector: 'app-project-detail',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() props: {selectedProject: Project; idUser: string; };
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
+
 
 }
