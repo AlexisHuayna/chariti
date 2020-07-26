@@ -56,14 +56,14 @@
                         <button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
                             Modificar un número de contacto
                         </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="exampleModal" #modal tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <form [formGroup]="userNumberAddForm"
                                         (ngSubmit)="addNumber(userNumberAddForm.value)">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">M odificar número de
+                                            <h5 class="modal-title" id="exampleModalLabel">Modificar número de
                                                 contacto</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>

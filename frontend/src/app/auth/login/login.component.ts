@@ -12,13 +12,25 @@ import { User } from 'src/app/other/interfaces';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
-
   private user: User = {
     UserEmail: '',
     UserName: '',
     UserDescription: ''
   };
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) {
+    this.authService.isAuth().subscribe(
+      res => {
+        if (res) {
+          this.userService.getUserByEmail(res.email).subscribe(
+            user => {
+              this.user = user;
+              this.router.navigate(['/main/home']);
+            }
+          );
+        }
+      }
+    );
+  }
   ngOnInit() {
   }
 

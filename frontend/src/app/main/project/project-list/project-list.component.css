@@ -1,0 +1,7 @@
+.projectlist{
+    cursor: pointer;
+}
+.projectlist:hover 
+{
+    background-color: #e5e5e5;
+}

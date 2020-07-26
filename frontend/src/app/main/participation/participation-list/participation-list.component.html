@@ -1,12 +1,25 @@
-<h1>List of participants</h1>
-
-<ul class="list-group" *ngIf="participations != null">
-    <li class="list-group-item" *ngFor="let participation of embeddedParticipation" >
-        <div *ngIf="props.userId != null">
-            <span>{{participation.User.UserName}}</span>
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>Participantes</h5>
         </div>
-        <div *ngIf="props.projectId != null">
-            <span>{{participation.Project.ProjectName}}</span>
-        </div>
-    </li>
-</ul>
+        <ul class="list-group" *ngIf="participations != null; else noparticipationblock">
+            <li class="list-group-item" *ngFor="let participation of embeddedParticipation" >
+                <div *ngIf="props.userId != null">
+                    <span>{{participation.User.UserName}}</span>
+                </div>
+                <div *ngIf="props.projectId != null">
+                    <span>{{participation.Project.ProjectName}}</span>
+                </div>
+            </li>
+        </ul>
+        <ng-template #noparticipationblock>
+            <div class="card" style="height: 3rem;">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Aun no hay Participantes</h6>
+                </div>
+            </div>
+        </ng-template>
+        
+    </div>
+</div>

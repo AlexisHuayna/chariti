@@ -1,14 +1,25 @@
-<h1>
-    Project detail
-</h1>
-
-<div *ngIf="props != null && props.selectedProject != null" class="card">
+<div *ngIf="props != null && props.selectedProject != null; else elseBlock" class="card">
     <div class="card-body">
         <h4 class="card-title">{{props.selectedProject.ProjectName}}</h4>
-        <p>{{props.selectedProject.ProjectDescription}}</p>
-        <p>{{props.selectedProject.ProjectDateInit | date}}</p>
-        <p>{{props.selectedProject.ProjectDateClose | date}}</p>
-        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser">Donar</button>
-        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser">Participar</button>
+        <div class="card-text">
+            <p>{{props.selectedProject.ProjectDescription}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Fecha de inicio: {{props.selectedProject.ProjectDateInit | date}}</li>
+            <li class="list-group-item">Fecha de fin: {{props.selectedProject.ProjectDateClose | date}}</li>
+        </ul>
+        <app-donation-add  *ngIf="props.selectedProject.UserOwnerId!=props.idUser" > </app-donation-add>
+
+        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser" class="btn btn-success ml-1">Participar</button>
     </div>
 </div>
+<ng-template #elseBlock>
+    <div class="card" style="height: 15rem;">
+        <div class="card-body text-center">
+            <div class="loader card-img-top"></div>
+            <h5 class="card-title">Selecciona un proyecto</h5>
+            <h6 class="card-subtitle mb-2 text-muted">En esta sección se mostraran los detalles del proyecto que
+                selecciones.</h6>
+        </div>
+    </div>
+</ng-template>

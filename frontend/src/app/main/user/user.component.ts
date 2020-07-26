@@ -13,7 +13,8 @@ import { ProjectService } from 'src/app/services/project/project.service';
 })
 export class UserComponent implements OnInit {
 
-  @ViewChild('collapse', { static: true }) collapse: ElementRef;
+  @ViewChild('collapse', { static: false }) collapse: ElementRef;
+  @ViewChild('modal', { static: false }) modal: ElementRef;
 
   public user: User;
   public projects: Project[];
@@ -78,6 +79,6 @@ export class UserComponent implements OnInit {
           this.user = res;
         }
       );
+      this.modal.nativeElement.className = 'modal fade';
   }
-
 }

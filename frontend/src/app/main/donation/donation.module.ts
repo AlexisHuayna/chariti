@@ -4,12 +4,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 import { DonationRoutingModule } from './donation-routing.module';
 import { DonationComponent } from './donation.component';
-import { DonationListComponent } from './donation-list/donation-list.component';
 import { DonationDetailComponent } from './donation-detail/donation-detail.component';
 
 
 @NgModule({
-  declarations: [DonationComponent, DonationListComponent, DonationDetailComponent],
+  declarations: [DonationComponent, DonationDetailComponent],
   imports: [
     CommonModule,
     DonationRoutingModule,

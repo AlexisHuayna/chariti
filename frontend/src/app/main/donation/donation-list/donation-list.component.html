@@ -1,10 +1,22 @@
-<h3>List of donators</h3>
-
-<ul class="list-group" *ngIf="donations != null">
-    <li class="list-group-item" *ngFor="let donations of donations">
-        <div class="row">
-            <div class="col">{{donations.UserId}}</div>
-            <div class="col">{{donations.DonationAmount | currency}}</div>
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>Donadores</h5>
         </div>
-    </li>
-</ul>
+        <ul class="list-group" *ngIf="donations != null; else nodonationblock">
+            <li class="list-group-item" *ngFor="let donations of donations">
+                <div class="row">
+                    <div class="col">{{donations.UserId}}</div>
+                    <div class="col">{{donations.DonationAmount | currency}}</div>
+                </div>
+            </li>
+        </ul>
+        <ng-template #nodonationblock>
+            <div class="card" style="height: 3rem;">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Aun no hay donadores</h6>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
