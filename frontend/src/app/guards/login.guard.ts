@@ -6,7 +6,7 @@ import { take, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
   canActivate() {
     return this.authService.angularFirebaseAuth.authState.pipe(take(1)).pipe(map(authState => !!authState)).pipe(tap(auth => {
       if (auth) {
+        this.router.navigate(['/main/home']);
         return true;
       } else {
         this.router.navigate(['/login']);
@@ -21,4 +22,5 @@ export class AuthGuard implements CanActivate {
       }
     }));
   }
+
 }
