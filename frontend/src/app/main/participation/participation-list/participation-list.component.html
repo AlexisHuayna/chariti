@@ -6,10 +6,10 @@
         <ul class="list-group" *ngIf="participations != null; else noparticipationblock">
             <li class="list-group-item" *ngFor="let participation of embeddedParticipation" >
                 <div *ngIf="props.userId != null">
-                    <span>{{participation.User.UserName}}</span>
+                    <span>{{participation.Project.ProjectName}}</span>
                 </div>
                 <div *ngIf="props.projectId != null">
-                    <span>{{participation.Project.ProjectName}}</span>
+                    <span>{{participation.User.UserName}}</span>
                 </div>
             </li>
         </ul>
@@ -20,6 +20,5 @@
                 </div>
             </div>
         </ng-template>
-        
     </div>
 </div>

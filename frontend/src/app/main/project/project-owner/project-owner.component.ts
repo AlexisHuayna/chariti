@@ -14,8 +14,6 @@ import { UserService } from 'src/app/services/user/user.service';
 export class ProjectOwnerComponent implements OnInit {
 
   public projectListProps: { idUser: string; viewDetails: boolean; };
-  public donationsListProps: { idUser: string; idProject: string; viewDetails: boolean; };
-  public participationListProps: {userId: string; projectId: string; };
   public projectDetailProps: {selectedProject: Project; idUser: string; };
   public selectedProject: Project = null;
   public currentUser: User;
@@ -45,21 +43,12 @@ export class ProjectOwnerComponent implements OnInit {
   initChilds() {
     this.projectListProps = { idUser: this.currentUser._id, viewDetails: false };
 
-    this.donationsListProps = { idProject: null, idUser: null, viewDetails: false };
-
-    this.participationListProps = { userId: null, projectId: null };
-
     this.projectDetailProps = {selectedProject: this.selectedProject, idUser: this.currentUser._id };
 
   }
 
   updateSelectedProject(selectedProjectOnChild: Project) {
-    console.log(selectedProjectOnChild);
     this.selectedProject = selectedProjectOnChild;
-
-    this.donationsListProps.idProject = this.selectedProject._id;
-
-    this.participationListProps.projectId = this.selectedProject._id;
 
     this.projectDetailProps.selectedProject = this.selectedProject;
   }

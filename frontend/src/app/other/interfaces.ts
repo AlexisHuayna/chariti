@@ -27,6 +27,15 @@ export interface Donation {
     DonationStatus: boolean;
 }
 
+export interface EmbeddedDonation {
+    _id?: string;
+    UserId: string;
+    Project?: Project;
+    DonationAmount: number;
+    DonationDate: Date;
+    DonationStatus: boolean;
+}
+
 export interface Participation {
     _id?: string;
     UserId: string;

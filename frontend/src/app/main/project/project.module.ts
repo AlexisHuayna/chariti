@@ -10,11 +10,13 @@ import { ProjectOwnerComponent } from './project-owner/project-owner.component';
 import { DonationAddComponent } from '../donation/donation-add/donation-add.component';
 import { DonationListComponent } from '../donation/donation-list/donation-list.component';
 import { ParticipationListComponent } from '../participation/participation-list/participation-list.component';
+import { ParticipationAddComponent } from '../participation/participation-add/participation-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ProjectComponent, ProjectDetailComponent, ProjectListComponent, ProjectAddComponent,
-                  ProjectOwnerComponent, DonationAddComponent, DonationListComponent, ParticipationListComponent],
+  declarations: [ ProjectComponent, ProjectDetailComponent, ProjectListComponent, ProjectAddComponent,
+                  ProjectOwnerComponent, DonationAddComponent, DonationListComponent, ParticipationListComponent,
+                  ParticipationAddComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,

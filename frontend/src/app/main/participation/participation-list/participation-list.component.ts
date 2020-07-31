@@ -13,8 +13,8 @@ import { ProjectService } from 'src/app/services/project/project.service';
 export class ParticipationListComponent implements OnInit, OnChanges {
 
    @Input() props: {userId: string; projectId: string; };
-   public participations: Participation[];
-   public embeddedParticipation: EmbeddedParticipation[];
+   public participations: Participation[] = [];
+   public embeddedParticipation: EmbeddedParticipation[] = [];
 
    constructor(public participationService: ParticipationService, public userService: UserService, public projectService: ProjectService) {
    }
@@ -24,6 +24,7 @@ export class ParticipationListComponent implements OnInit, OnChanges {
    }
 
    ngOnInit() {
+      this.getParticipations();
    }
 
    public getParticipations(): void {
@@ -38,6 +39,7 @@ export class ParticipationListComponent implements OnInit, OnChanges {
          }
          if (participationObservable) {
             participationObservable.subscribe(participationsResponse => {
+               this.embeddedParticipation = [];
                this.participations = participationsResponse;
                if (this.props.userId != null) {
                   this.setProjects();
@@ -51,29 +53,40 @@ export class ParticipationListComponent implements OnInit, OnChanges {
    }
 
    public setUsers(): void {
-      this.participations.forEach(participation => {
-         this.userService.getUser(participation.UserId).subscribe(user => {
-            const newParticipation: EmbeddedParticipation = {
-               _id: participation._id,
-               User: user,
-               ParticipationStatus: participation.ParticipationStatus
-            };
-            this.embeddedParticipation.push(newParticipation);
-         });
-      });
+      this.projectService.getProject(this.props.projectId).subscribe(
+         projectResponse => {
+            this.participations.forEach(participation => {
+               this.userService.getUser(participation.UserId).subscribe(user => {
+                  const newParticipation: EmbeddedParticipation = {
+                     _id: participation._id,
+                     Project: projectResponse,
+                     User: user,
+                     ParticipationStatus: participation.ParticipationStatus
+                  };
+                  this.embeddedParticipation.push(newParticipation);
+               });
+            });
+
+         }
+      );
    }
 
    public setProjects(): void {
-      this.participations.forEach(participation => {
-         this.projectService.getProject(participation.ProjectId).subscribe(project => {
-            const newParticipation: EmbeddedParticipation = {
-               _id: participation._id,
-               Project: project,
-               ParticipationStatus: participation.ParticipationStatus
-            };
-            this.embeddedParticipation.push(newParticipation);
-         });
-      });
+      this.userService.getUser(this.props.userId).subscribe(
+         userResponse => {
+            this.participations.forEach(participation => {
+               this.projectService.getProject(participation.ProjectId).subscribe(project => {
+                  const newParticipation: EmbeddedParticipation = {
+                     _id: participation._id,
+                     Project: project,
+                     User: userResponse,
+                     ParticipationStatus: participation.ParticipationStatus
+                  };
+                  this.embeddedParticipation.push(newParticipation);
+               });
+            });
+         }
+      );
    }
 
 }

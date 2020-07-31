@@ -11,7 +11,7 @@ export class DonationService {
 
   constructor(private http: HttpClient) { }
 
-  BASE_URL = 'http://localhost:3000';
+  BASE_URL = 'http://localhost:8000';
 
   getLastDonations(): Observable<Donation[]> {
     return this.http.get<Donation[]>(`${this.BASE_URL}/donations`);
@@ -20,10 +20,10 @@ export class DonationService {
     return this.http.get<Donation[]>(`${this.BASE_URL}/donations/${projectId}/${userId}`);
   }
   getDonationsProject(projectId: string): Observable<Donation[]>  {
-    return this.http.get<Donation[]>(`${this.BASE_URL}/donations/${projectId}`);
+    return this.http.get<Donation[]>(`${this.BASE_URL}/donations/projects/${projectId}`);
   }
   getDonationsUser(userId: string): Observable<Donation[]> {
-    return this.http.get<Donation[]>(`${this.BASE_URL}/donations/${userId}`);
+    return this.http.get<Donation[]>(`${this.BASE_URL}/donations/users/${userId}`);
   }
   createDonation(donation: Donation): Observable<Donation> {
     return this.http.post<Donation>(`${this.BASE_URL}/donations`, donation);

@@ -1,1 +1,17 @@
-<p>participation works!</p>
+<div class="container">
+    <h3>Coming projects</h3>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let participation of participationOnOpenProjects">
+            {{participation.Project.ProjectName}}
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <h3>Closed projects</h3>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let participation of participationOnClosedProjects">
+            {{participation.Project.ProjectName}}
+        </li>
+    </ul>
+</div>

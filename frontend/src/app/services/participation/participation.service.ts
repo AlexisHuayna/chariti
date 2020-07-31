@@ -11,7 +11,7 @@ export class ParticipationService {
 
   constructor(private http: HttpClient) { }
 
-  BASE_URL = 'http://localhost:3000';
+  BASE_URL = 'http://localhost:8000';
 
   getParticipationsProject(projectId: string): Observable<Participation[]>  {
     return this.http.get<Participation[]>(`${this.BASE_URL}/participations/projects/${projectId}`);

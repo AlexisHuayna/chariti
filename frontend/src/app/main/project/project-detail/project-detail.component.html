@@ -9,9 +9,12 @@
             <li class="list-group-item">Fecha de fin: {{props.selectedProject.ProjectDateClose | date}}</li>
         </ul>
         <app-donation-add  *ngIf="props.selectedProject.UserOwnerId!=props.idUser" > </app-donation-add>
-
-        <button *ngIf="props.selectedProject.UserOwnerId!=props.idUser" class="btn btn-success ml-1">Participar</button>
+        <app-participation-add [props]="participationAddProps"></app-participation-add>
     </div>
+</div>
+<div *ngIf="props != null && props.selectedProject != null">
+    <app-donation-list [props]="donationsListProps"></app-donation-list>
+    <app-participation-list [props]="participationListProps"></app-participation-list>
 </div>
 <ng-template #elseBlock>
     <div class="card" style="height: 15rem;">
