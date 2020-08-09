@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from 'src/app/services/project/project.service';
 
 @Component({
   selector: 'app-donation-detail',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonationDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() projectId: string;
+  public amount;
+
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
+  }
+  getProjectAmount() {
+    this.projectService.getProjectAmount(this.projectId).subscribe( amount => {
+      this.amount = amount;
+    } );
   }
 
 }

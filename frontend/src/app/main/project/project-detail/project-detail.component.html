@@ -8,14 +8,13 @@
             <li class="list-group-item">Fecha de inicio: {{props.selectedProject.ProjectDateInit | date}}</li>
             <li class="list-group-item">Fecha de fin: {{props.selectedProject.ProjectDateClose | date}}</li>
         </ul>
-        <app-donation-detail></app-donation-detail>
-        <app-donation-add
-            *ngIf="props.selectedProject.UserOwnerId!=props.idUser" 
+        <app-donation-detail *ngIf="props.selectedProject.UserOwnerId!=props.idUser"
+            [projectId]="props.selectedProject._id">
+        </app-donation-detail>
+        <app-donation-add *ngIf="props.selectedProject.UserOwnerId!=props.idUser"
             [projectId]="props.selectedProject._id">
         </app-donation-add>
-        <app-participation-add 
-            *ngIf="props.selectedProject.UserOwnerId!=props.idUser"
-            [props]="participationAddProps">
+        <app-participation-add *ngIf="props.selectedProject.UserOwnerId!=props.idUser" [props]="participationAddProps">
         </app-participation-add>
     </div>
 

@@ -22,6 +22,10 @@ export class ProjectService {
     return this.http.get<Project[]>(`${this.BASE_URL}/projects`);
   }
 
+  getProjectAmount(id: string): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/projects/amount/${id}`);
+  }
+
   getOwnerProjects(userId: string): Observable<Project[]>  {
     return this.http.get<Project[]>(`${this.BASE_URL}/projects/owners/${userId}`);
   }
