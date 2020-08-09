@@ -43,7 +43,7 @@ export class DonationComponent implements OnInit {
         donationsResponse.forEach(donation => {
           const newEmbeddedDonation: EmbeddedDonation = {
             _id: donation._id,
-            UserId: donation.UserId,
+            User: this.currentUser,
             Project: null,
             DonationAmount: donation.DonationAmount,
             DonationDate: donation.DonationDate,

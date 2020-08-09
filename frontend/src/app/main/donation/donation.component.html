@@ -2,8 +2,8 @@
     <h3>Coming projects</h3>
     <div class="row" *ngFor="let donation of donationsOnOpenProjects">
         <div class="col">{{donation.Project.ProjectName}}</div>
-        <div class="col">{{donation.DonationAmount}}</div>
-        <div class="col">{{donation.DonationDate}}</div>
+        <div class="col">{{donation.DonationAmount|currency}}</div>
+        <div class="col">{{donation.DonationDate|date}}</div>
     </div>
 </div>
 
@@ -11,7 +11,7 @@
     <h3>Closed projects</h3>
     <div class="row" *ngFor="let donation of donationsOnClosedProjects">
         <div class="col">{{donation.Project.ProjectName}}</div>
-        <div class="col">{{donation.DonationAmount}}</div>
-        <div class="col">{{donation.DonationDate}}</div>
+        <div class="col">{{donation.DonationAmount|currency}}</div>
+        <div class="col">{{donation.DonationDate|date}}</div>
     </div>
 </div>

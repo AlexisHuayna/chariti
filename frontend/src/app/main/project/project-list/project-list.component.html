@@ -1,7 +1,7 @@
 <h3>Todos los proyectos</h3>
 
 <ul class="list-group">
-    <li class="list-group-item projectlist" *ngFor="let project of projects" (click)="updateProject(project)">
+    <li class="list-group-item projectlist" *ngFor="let project of projects" (click)="updateProject(project, $event)" >
         {{project.ProjectName}} 
     </li>
 </ul>

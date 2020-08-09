@@ -8,14 +8,22 @@
             <li class="list-group-item">Fecha de inicio: {{props.selectedProject.ProjectDateInit | date}}</li>
             <li class="list-group-item">Fecha de fin: {{props.selectedProject.ProjectDateClose | date}}</li>
         </ul>
-        <app-donation-add  *ngIf="props.selectedProject.UserOwnerId!=props.idUser" > </app-donation-add>
-        <app-participation-add [props]="participationAddProps"></app-participation-add>
+        <app-donation-detail></app-donation-detail>
+        <app-donation-add
+            *ngIf="props.selectedProject.UserOwnerId!=props.idUser" 
+            [projectId]="props.selectedProject._id">
+        </app-donation-add>
+        <app-participation-add 
+            *ngIf="props.selectedProject.UserOwnerId!=props.idUser"
+            [props]="participationAddProps">
+        </app-participation-add>
     </div>
-</div>
-<div *ngIf="props != null && props.selectedProject != null">
+
     <app-donation-list [props]="donationsListProps"></app-donation-list>
     <app-participation-list [props]="participationListProps"></app-participation-list>
+
 </div>
+
 <ng-template #elseBlock>
     <div class="card" style="height: 15rem;">
         <div class="card-body text-center">

@@ -3,10 +3,10 @@
         <div class="card-title">
             <h5>Donadores</h5>
         </div>
-        <ul class="list-group" *ngIf="donations != null; else nodonationblock">
+        <ul class="list-group" *ngIf="donations != null && donations.length > 0; else nodonationblock">
             <li class="list-group-item" *ngFor="let donations of donations">
                 <div class="row">
-                    <div class="col">{{donations.UserId}}</div>
+                    <div class="col">{{donations.User.UserName}}</div>
                     <div class="col">{{donations.DonationAmount | currency}}</div>
                 </div>
             </li>
@@ -18,8 +18,5 @@
                 </div>
             </div>
         </ng-template>
-        <div *ngIf="props!= null">
-            {{props.idProject}}
-        </div>
     </div>
 </div>

@@ -19,20 +19,13 @@ export class ParticipationAddComponent implements OnInit, OnChanges {
   constructor(public participationService: ParticipationService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.ownerProject = this.isOwnerProject();
-    if (this.onProject()) {
-      this.participationText = 'Stop participating';
-    } else {
-      this.participationText = 'Take a part';
-    }
+    this.participationText = 'Take a part';
+    this.onProject();
   }
 
   ngOnInit() {
-    if (this.onProject()) {
-      this.participationText = 'Stop participating';
-    } else {
-      this.participationText = 'Take a part';
-    }
+    this.participationText = 'Take a part';
+    this.onProject();
   }
 
   participationHandler() {
@@ -53,33 +46,21 @@ export class ParticipationAddComponent implements OnInit, OnChanges {
     }
   }
 
-  onProject(): boolean {
+  onProject() {
     if ( this.props != null && this.props.user != null) {
-      if ( this.props.user._id === this.props.project.UserOwnerId) {
-        this.participationService.getParticipationsProject(this.props.project._id).subscribe(
-          participationsResponse => {
-            participationsResponse.forEach(
-              participation => {
-                if (participation.UserId === this.props.user._id) {
-                  return true;
-                }
+      this.participationService.getParticipationsProject(this.props.project._id).subscribe(
+        participationsResponse => {
+          participationsResponse.forEach(
+            participation => {
+              if (participation.UserId == this.props.user._id) {
+                this.participationText = 'Stop participating';
               }
-            );
-          }
-        );
-      }
+            }
+          );
+        }
+      );
     } else {
-      return false;
+      this.participationText = 'Take a part';
     }
   }
-
-  isOwnerProject(): boolean {
-    if ( this.props != null && this.props.user != null) {
-      if ( this.props.user._id === this.props.project.UserOwnerId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 }

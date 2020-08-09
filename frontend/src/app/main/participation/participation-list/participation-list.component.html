@@ -3,7 +3,7 @@
         <div class="card-title">
             <h5>Participantes</h5>
         </div>
-        <ul class="list-group" *ngIf="participations != null; else noparticipationblock">
+        <ul class="list-group" *ngIf="participations != null && participations.length > 0; else noparticipationblock">
             <li class="list-group-item" *ngFor="let participation of embeddedParticipation" >
                 <div *ngIf="props.userId != null">
                     <span>{{participation.Project.ProjectName}}</span>

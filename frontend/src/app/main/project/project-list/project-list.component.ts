@@ -40,9 +40,15 @@ export class ProjectListComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  updateProject(project: Project) {
+  updateProject(project: Project, event) {
     this.selectedProjectOnChild.emit(project);
+    const selectedItem = event.target;
+    const childs = selectedItem.parentElement.children;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < childs.length; ++i) {
+      childs[i].className = 'list-group-item projectlist';
+    }
+    selectedItem.className += ' active';
   }
-
 
 }

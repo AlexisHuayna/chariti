@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DonationService } from 'src/app/services/donation/donation.service';
-import { Donation } from 'src/app/other/interfaces';
+import { Donation, EmbeddedDonation } from 'src/app/other/interfaces';
 import { Observable } from 'rxjs';
+import { ProjectService } from 'src/app/services/project/project.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-donation-list',
@@ -11,9 +13,9 @@ import { Observable } from 'rxjs';
 export class DonationListComponent implements OnInit, OnChanges {
 
   @Input() props: { idUser: string; idProject: string; viewDetails: boolean; };
-  public donations: Donation[] = null;
+  public donations: EmbeddedDonation[] = null;
 
-  constructor(public donationService: DonationService) {
+  constructor(public donationService: DonationService, public projectService: ProjectService, public userService: UserService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -21,6 +23,7 @@ export class DonationListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.getDonations();
   }
 
   getDonations() {
@@ -34,13 +37,59 @@ export class DonationListComponent implements OnInit, OnChanges {
         donationObservable = null;
       }
       if (donationObservable) {
-        donationObservable.subscribe({
-          next(donationsResponse) {
-            this.donations = donationsResponse;
+        donationObservable.subscribe(
+          donationsResponse => {
+            this.donations = [];
+            if (this.props.idUser != null) {
+              this.setProjects(donationsResponse);
+           } else {
+              this.setUsers(donationsResponse);
+           }
           }
-        });
+        );
       }
     }
   }
+
+  public setUsers(donationsResponse): void {
+    this.projectService.getProject(this.props.idProject).subscribe(
+       projectResponse => {
+          donationsResponse.forEach(donation => {
+             this.userService.getUser(donation.UserId).subscribe(user => {
+                const newDonation: EmbeddedDonation = {
+                  _id: donation._id,
+                  Project: projectResponse,
+                  User: user,
+                  DonationAmount: donation.DonationAmount,
+                  DonationDate: donation.DonationDate,
+                  DonationStatus: donation.DonationStatus,
+                };
+                this.donations.push(newDonation);
+             });
+          });
+
+       }
+    );
+ }
+
+ public setProjects(donationsResponse): void {
+    this.userService.getUser(this.props.idUser).subscribe(
+       userResponse => {
+          donationsResponse.forEach(donation => {
+             this.projectService.getProject(donation.ProjectId).subscribe(project => {
+                const newDonation: EmbeddedDonation = {
+                  _id: donation._id,
+                  Project: project,
+                  User: userResponse,
+                  DonationAmount: donation.DonationAmount,
+                  DonationDate: donation.DonationDate,
+                  DonationStatus: donation.DonationStatus
+                };
+                this.donations.push(newDonation);
+             });
+          });
+       }
+    );
+ }
 
 }

@@ -23,13 +23,13 @@ export interface Donation {
     UserId: string;
     ProjectId: string;
     DonationAmount: number;
-    DonationDate: Date;
-    DonationStatus: boolean;
+    DonationDate?: Date;
+    DonationStatus?: boolean;
 }
 
 export interface EmbeddedDonation {
     _id?: string;
-    UserId: string;
+    User?: User;
     Project?: Project;
     DonationAmount: number;
     DonationDate: Date;
