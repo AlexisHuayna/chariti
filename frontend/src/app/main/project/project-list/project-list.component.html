@@ -1,7 +1,15 @@
-<h3>Todos los proyectos</h3>
-
-<ul class="list-group">
-    <li class="list-group-item projectlist" *ngFor="let project of projects" (click)="updateProject(project, $event)" >
-        {{project.ProjectName}} 
-    </li>
-</ul>
+<h3>Proyectos</h3>
+<div *ngIf="projects.length != 0; else elseBlock">
+    <ul class="list-group">
+        <li class="list-group-item projectlist" *ngFor="let project of projects" (click)="updateProject(project, $event)" >
+            {{project.ProjectName}} 
+        </li>
+    </ul>
+</div>
+<ng-template #elseBlock>
+    <div class="card" style="height: 15rem;">
+        <div class="card-body text-center">
+            <h6 class="card-subtitle mb-2 text-muted">Aun no tienes proyectos creados.</h6>
+        </div>
+    </div>
+</ng-template>
