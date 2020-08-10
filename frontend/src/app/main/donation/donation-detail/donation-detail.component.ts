@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectService } from 'src/app/services/project/project.service';
 
 @Component({
@@ -6,18 +6,26 @@ import { ProjectService } from 'src/app/services/project/project.service';
   templateUrl: './donation-detail.component.html',
   styleUrls: ['./donation-detail.component.css']
 })
-export class DonationDetailComponent implements OnInit {
+export class DonationDetailComponent implements OnInit, OnChanges {
 
   @Input() projectId: string;
   public amount;
 
   constructor(private projectService: ProjectService) { }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getProjectAmount();
   }
+
+  ngOnInit() {
+    this.getProjectAmount();
+  }
+
   getProjectAmount() {
-    this.projectService.getProjectAmount(this.projectId).subscribe( amount => {
-      this.amount = amount;
+    this.projectService.getProjectAmount(this.projectId).subscribe( projectAmountResponse => {
+      if (projectAmountResponse && projectAmountResponse[0]) {
+        this.amount = projectAmountResponse[0].amount;
+      }
     } );
   }
 

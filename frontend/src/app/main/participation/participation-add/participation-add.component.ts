@@ -38,11 +38,15 @@ export class ParticipationAddComponent implements OnInit, OnChanges {
       this.participationService.createParticipation(newParticipation).subscribe(
         participationResponse => {
           this.currentParticipation = participationResponse;
+          this.onProject();
         }
       );
     } else {
-      console.log(this.participationText);
-      this.participationService.deleteParticipation(this.currentParticipation._id);
+      this.participationService.deleteParticipation(this.currentParticipation._id).subscribe(
+        response => {
+          this.onProject();
+        }
+      );
     }
   }
 
@@ -53,6 +57,7 @@ export class ParticipationAddComponent implements OnInit, OnChanges {
           participationsResponse.forEach(
             participation => {
               if (participation.UserId == this.props.user._id) {
+                this.currentParticipation = participation;
                 this.participationText = 'Stop participating';
               }
             }

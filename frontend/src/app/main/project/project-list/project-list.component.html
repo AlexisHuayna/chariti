@@ -1,5 +1,5 @@
 <h3>Proyectos</h3>
-<div *ngIf="projects.length != 0; else elseBlock">
+<div *ngIf="projects != null && projects.length != 0; else elseBlock">
     <ul class="list-group">
         <li class="list-group-item projectlist" *ngFor="let project of projects" (click)="updateProject(project, $event)" >
             {{project.ProjectName}} 

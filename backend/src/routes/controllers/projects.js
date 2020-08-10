@@ -1,4 +1,6 @@
 const Project = require('../../models/Project');
+const Donation = require('../../models/Donation');
+const mongoose = require('mongoose');
 
 module.exports = {
 
@@ -34,6 +36,19 @@ module.exports = {
                 res.status(500).end()
             }
             res.status(200).send(projects)
+        });
+    },
+    
+    getTotalAmount: (req, res) => {
+        var project_id = req.params.projectId
+        Donation.aggregate([
+            { $match: { ProjectId: mongoose.Types.ObjectId(project_id)}},
+            { $group: { _id: "$ProjectId", amount: {$sum: "$DonationAmount"} } }
+        ]).exec((err, total) => {
+            if(err){
+                res.status(500).end();
+            };
+            res.status(200).send(total);
         });
     },
 

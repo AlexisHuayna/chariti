@@ -14,6 +14,10 @@ project_routes.get('/projects/owners/:userId', (req, res) => {
     project_controller.getProjectsByOwnerId(req, res)
 });
 
+project_routes.get('/projects/amount/:projectId', (req, res) => {
+    project_controller.getTotalAmount(req, res)
+});
+
 project_routes.post('/projects', (req, res) => {
    project_controller.createProject(req, res) 
 });
